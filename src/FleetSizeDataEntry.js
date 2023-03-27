@@ -388,7 +388,7 @@ First, you will be asked to fill in the general parameters about the service to 
             </tr>
         </tbody>
     </table>
-    <button type="submit">Submit</button>
+    <Button type="submit"className="bg-blue-100 text-black mt-2" >set values</Button>
     </form>
 </div>
 
@@ -582,7 +582,7 @@ First, you will be asked to fill in the general parameters about the service to 
           
         </tbody>
     </table>
-    <button type="submit">Submit2</button>
+    <Button type="submit"className="bg-blue-100 text-black mt-2" >set values</Button>
 
     </form>
 
@@ -684,7 +684,7 @@ First, you will be asked to fill in the general parameters about the service to 
        
      </tbody>
  </table>
- <button type="submit">Submit2</button>
+ <Button type="submit"className="bg-blue-100 text-black mt-2" >set values</Button>
  </form>
 </div>
       ) : selectedOptionBis === 'no' ? (
@@ -797,7 +797,7 @@ First, you will be asked to fill in the general parameters about the service to 
         
       </tbody>
   </table>
-  <button type="submit">Submit3</button>
+  <Button type="submit"className="bg-blue-100 text-black mt-2" >set values</Button>
   </form>
  </div>
       ) : (
@@ -815,7 +815,7 @@ First, you will be asked to fill in the general parameters about the service to 
       ) : (
         // green form 
         <div class="relative overflow-x-auto">
-        <form onSubmit={formik2.handleSubmit}>
+        <form onSubmit={Supplyformik.handleSubmit}>
  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
      <thead class="text-xs text-gray-700 uppercase bg-green-200 dark:bg-gray-700 dark:text-gray-400">
          <tr>
@@ -939,12 +939,13 @@ First, you will be asked to fill in the general parameters about the service to 
        
      </tbody>
  </table>
+ <Button type="submit"className="bg-green-100 text-black mt-2" >set values</Button>
  </form>
 </div>
       )}
 
        <Link to='/FleetSizeDataResults'
-      state ={{fisrtformvalues }}>Learn More</Link>
+      state ={{fisrtformvalues }}><Button style={{ marginTop: "30px" }}>Next</Button></Link>
     </div>
 
 

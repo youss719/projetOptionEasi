@@ -1,5 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
+import {Link} from 'react-router-dom';
 
 //import "@material-tailwind/react/tailwind.css";
 
@@ -212,13 +213,16 @@ Percentage of public transport utilization are most likely available - calculati
               />
             </div> */}
             <br/>
+
             <div style={{ marginBottom: "30px", width: "100%" }}>
-              <Button
-                type="submit"
-           
-              >
-                Submit
-              </Button>
+            <Link to='/FleetSizeDataEntry'
+      ><Button
+      type="submit"
+ 
+    >
+      Submit
+    </Button></Link>
+              
             </div>
           
         {/* </form>

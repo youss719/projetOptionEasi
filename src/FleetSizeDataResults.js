@@ -15,7 +15,7 @@ import { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useFormik } from 'formik';
 import { useLocation } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 //import TextInput from "./components/TextInput";
 
@@ -77,6 +77,57 @@ const FleetSizeDataResults = (props) => {
     var calcul =(60*values.C)/Numberofpassengersforoffpeakhours(values);
     return calcul
   }
+  const Numberofpassengersperhour = (values) => {
+    var calcul =(60*values.C)/Numberofpotentialusersperday(values)/values.WD;
+    
+    return calcul
+  }
+  const Frequencyperhour = (values) => {
+    var calcul =(60*values.C)/Numberofpassengersperhour(values);
+    return calcul
+  }
+  const N7 = (values) => {
+    var calcul =(120*values.L/values.S)+values.T+N6(values)
+    return calcul
+  }
+  const N6 = (values) => {
+    var calcul =(((120*values.L/values.S)+values.T)*values.To)/values.A
+    return calcul
+  }
+   
+  const Fleetsizefor1hourofservice = (values) => {
+    var calcul =N7(values)/Frequencyperhour(values);
+    return calcul
+  }
+  const NumberofpassengersforpeakhoursSupply = (values) => {
+    var calcul =(60*values.L)/values.Fph ;
+    return calcul
+  }
+  const NumberofpassengersforoffpeakhoursSupply = (values) => {
+    var calcul =(60*values.L)/values.Foh ;
+    return calcul
+  }
+  const Fleetsizeforpeakhourscalculationsupply = (values) => {
+    var calcul =N7(values)/values.Fph;
+    return calcul
+  }
+  const Fleetsizeforoffpeakhourscalculationsupply = (values) => {
+    var calcul =N7(values)/values.Foh;
+    return calcul
+  }
+  const Dailysupply = (values) => {
+    var calcul =((values.O*60)*(values.D8*2)/N7(values))+(values.DP*2)
+    return calcul
+  }
+  const Monthlysupply = (values) => {
+    var calcul =Dailysupply(values)*values.WD
+    return calcul
+  }
+  const Yearlysupply = (values) => {
+    var calcul =Monthlysupply(values)*12;
+    return calcul
+  }
+
   
 
  
@@ -522,7 +573,8 @@ Senario 3
 
 
 
-
+  <Link to='/thirdpage'
+      ><Button style={{ marginTop: "30px" }}>Next</Button></Link>
 
     </div>
   );
