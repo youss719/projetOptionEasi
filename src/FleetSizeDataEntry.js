@@ -21,10 +21,13 @@ import {Link} from 'react-router-dom';
 const FleetSizeDataEntry = () => {
 
   const [fisrtformvalues, setFisrtformvalues] = useState(false);
+  const [secondformvalues, setSecondformvalues] = useState("");
   var firstformvaluesVar; 
   var formik2valuesVar; 
   var senario1FormikVar;
   var senario2FormikVar;
+  var objtest;
+  var supplyformikvaluesvar;
 
     const [checked, setChecked] = useState(false);
     const [checkedNo, setCheckedNo] = useState(false);
@@ -66,13 +69,34 @@ const FleetSizeDataEntry = () => {
     return calcule.toFixed(2);
   }
 
+  const [averageOperationalSpeedValue, setAverageOperationalSpeedValue] = useState('');
+  const [estimatedPpulationInTheAreaValue, setEstimatedPpulationInTheAreaValue] = useState('');
+  const [numberofthosehoursconsideredasoffpeakhoursValue, setNumberofthosehoursconsideredasoffpeakhoursValue] = useState('');
+  const [averageofpassengersexpectedduringoffpeakhoursValue, setAverageofpassengersexpectedduringoffpeakhoursValue] = useState('');
+  const [numberofHOURSconsideredasoffpeakhoursValue, setNumberofHOURSconsideredasoffpeakhoursValue] = useState('');
+
+ 
   const estimatedPpulationInTheArea = (values)=>{
     var calcule = values.PTU-values.MSc;
     return calcule;
 
   }
+  const averageofpassengersexpectedduringoffpeakhours = (values)=>{
+    var calcule = 100-values.Prph;
+    return calcule;
 
+  }
+  const numberofHOURSconsideredasoffpeakhours = (values,values2)=>{
+    var calcule = values2.O-values.Hph;
+    return calcule;
 
+  }
+
+  const numberofthosehoursconsideredasoffpeakhours = (values)=>{
+    var calcule = values.O-values.Hph;
+    return calcule
+  }
+  
 
   const formik = useFormik({
     initialValues: {
@@ -88,11 +112,17 @@ const FleetSizeDataEntry = () => {
       TO: '',
     },
     onSubmit: values => {
-      alert(JSON.stringify( averageOperationalSpeed(values), null, 2));
+    // alert(JSON.stringify( averageOperationalSpeed(values), null, 2));
       setFisrtformvalues(values);
       firstformvaluesVar= values;
+      
+      setAverageOperationalSpeedValue(averageOperationalSpeed(values));
       //setFisrtformvalues(values);
+    
+      console.log(averageOperationalSpeedValue)
+      formik.setFieldValue(values.S,averageOperationalSpeedValue)
       console.log(firstformvaluesVar);
+   
      
 
     },
@@ -104,19 +134,34 @@ const FleetSizeDataEntry = () => {
         MSc: '',
         MSb: '',
         MSp: '',
-      
+        
         NTp: '',
         O: '',
         WD: '',
    
     },
     onSubmit: (values )=> {
-      alert(JSON.stringify(values, null, 2));
-      formik2valuesVar= values;
+      
+      formik2valuesVar = values;
       console.log("from",senario1FormikVar)
-      let obj3 = {...formik2valuesVar,...fisrtformvalues}
+      setEstimatedPpulationInTheAreaValue(estimatedPpulationInTheArea(values));
+      //setFisrtformvalues(values);
+      
+      console.log(estimatedPpulationInTheAreaValue)
+     
+      
+
+      let person = {P:  estimatedPpulationInTheAreaValue     
+      }
+      console.log("hadou values", values)
+      let obj2 ={...formik2valuesVar,...person};
+      let obj3 = {...formik2valuesVar,...fisrtformvalues, ...person}
       console.log(obj3);
+      setSecondformvalues(obj2);
+      objtest = obj2;
+      console.log(obj2)
       setFisrtformvalues(obj3);
+      
      
       
     },
@@ -132,7 +177,23 @@ const FleetSizeDataEntry = () => {
      
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      
+      supplyformikvaluesvar= values;
+      setNumberofthosehoursconsideredasoffpeakhoursValue(numberofthosehoursconsideredasoffpeakhours(values));
+      //setFisrtformvalues(values);
+      
+      console.log(numberofthosehoursconsideredasoffpeakhoursValue)
+     
+      
+
+      let person = {Oph:  numberofthosehoursconsideredasoffpeakhoursValue     
+      }
+      console.log("hadou values", values)
+      
+      let obj3 = {...supplyformikvaluesvar,...fisrtformvalues, ...person}
+      console.log(obj3);
+      setFisrtformvalues(obj3);
+      
     },
   });
 
@@ -144,7 +205,7 @@ const FleetSizeDataEntry = () => {
      
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      ;
       senario1FormikVar= values;
       console.log("sen1",  senario1FormikVar)
       console.log("from",fisrtformvalues)
@@ -157,19 +218,39 @@ const FleetSizeDataEntry = () => {
   const senario2Formik= useFormik({
     initialValues: {
         Hph: '',
-        Hoh: '',
-        Prph: '',
-        Proh: '',
-      
+       
+        Prph: ''
      
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-       console.log(senario2FormikVar.O - values.Hph)
+
+     
+
+   
+       
+
+      //  setNumberofHOURSconsideredasoffpeakhoursValue(numberofHOURSconsideredasoffpeakhours(values,objtest));
+       var newone = secondformvalues;
+      //  var test = averageofpassengersexpectedduringoffpeakhours(values);
+      setNumberofHOURSconsideredasoffpeakhoursValue(numberofHOURSconsideredasoffpeakhours(values,newone));
+       setAverageofpassengersexpectedduringoffpeakhoursValue(averageofpassengersexpectedduringoffpeakhours(values))
+       console.log("new",newone)
+       console.log('test',averageofpassengersexpectedduringoffpeakhours(values,newone))
+
        senario2FormikVar= values;
+
+       let person = {Hoh:  numberofHOURSconsideredasoffpeakhoursValue  ,
+        Prhoh:    averageofpassengersexpectedduringoffpeakhoursValue
+       }
+       console.log("hadou values", values)
+ 
+       let obj3 = {...senario2FormikVar,...fisrtformvalues, ...person}
+       
+     
+       
       console.log("sen2",  senario2FormikVar)
       console.log("from",fisrtformvalues)
-      let obj3 = {...senario2FormikVar,...fisrtformvalues}
+      
       console.log(obj3);
       setFisrtformvalues(obj3);
 
@@ -306,14 +387,10 @@ First, you will be asked to fill in the general parameters about the service to 
                 <td class="px-6 py-4">
                 <label htmlFor="S">S</label>
                 </td>
-                <td class="px-6 py-4">
-                <input
-         id="S"
-         name="S"
-         type="text"
-         onChange={formik.handleChange}
-         value={formik.values.S}
-       />
+                <td class="px-6 py-4 bg-blue-100">
+                {/* {averageOperationalSpeedValue !== undefined && averageOperationalSpeedValue !== null &&
+                 (<div> {averageOperationalSpeedValue} </div>) } */}
+{averageOperationalSpeedValue}
                 </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -522,7 +599,7 @@ First, you will be asked to fill in the general parameters about the service to 
                 P
                 </td>
                 <td class="px-6 py-4 bg-blue-100">
-                Result
+               {estimatedPpulationInTheAreaValue}
                 </td>
             </tr>
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -732,33 +809,11 @@ First, you will be asked to fill in the general parameters about the service to 
               <td class="px-6 py-4">
               <label htmlFor="Hoh">Hoh</label>
               </td>
-              <td class="px-6 py-4">
-              <input
-       id="Hoh"
-       name="Hoh"
-       type="text"
-       onChange={senario2Formik.handleChange}
-       value={senario2Formik.values.Hoh}
-     />
+              <td class="px-6 py-4 bg-blue-100">
+              {numberofHOURSconsideredasoffpeakhoursValue}
               </td>
           </tr>
-          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              Number of HOURS considered as off-peak hours              </th>
-              
-              <td class="px-6 py-4">
-              <label htmlFor="Hoh">Hoh</label>
-              </td>
-              <td class="px-6 py-4">
-              <input
-       id="Hoh"
-       name="Hoh"
-       type="text"
-       onChange={senario2Formik.handleChange}
-       value={senario2Formik.values.Hoh}
-     />
-              </td>
-          </tr>
+
           <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
               <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               Average % of passengers expected during peak hours             </th>
@@ -783,14 +838,8 @@ First, you will be asked to fill in the general parameters about the service to 
               <td class="px-6 py-4">
               <label htmlFor="Hoh">Proh</label>
               </td>
-              <td class="px-6 py-4">
-              <input
-       id="Proh"
-       name="Proh"
-       type="text"
-       onChange={senario2Formik.handleChange}
-       value={senario2Formik.values.Proh}
-     />
+              <td class="px-6 py-4 bg-blue-100">
+              {averageofpassengersexpectedduringoffpeakhoursValue}
               </td>
           </tr>
          
@@ -878,7 +927,7 @@ First, you will be asked to fill in the general parameters about the service to 
              </td>
              <td class="px-6 py-4">
              <td class="px-6 py-4 bg-blue-100">
-             Result
+            {numberofthosehoursconsideredasoffpeakhoursValue}
              </td>
              </td>
              

@@ -10,6 +10,8 @@ import TextInput from './TextInput';
 import TestForm from './TestForm';
 import ContextctualizationComponent from './ContextctualizationComponent';
 import FormikForm from './Form';
+import ForthPage from './ForthPage';
+import FifthPage from './FifthPage';
 
 import {Routes, Route} from 'react-router-dom';
 
@@ -25,6 +27,8 @@ function App() {
     <Route path="/FleetSizeDataEntry"  element={<FleetSizeDataEntry/>}/>
     <Route path="/FleetSizeDataResults"  element={<FleetSizeDataResults/>}/>
     <Route path="/thirdpage"  element={<FormikForm/>}/>
+    <Route path="/forthpage"  element={<ForthPage/>}/>
+    <Route path="/fifthpage"  element={<FifthPage/>}/>
 
     </Routes>
    

@@ -77,6 +77,15 @@ const FleetSizeDataResults = (props) => {
     var calcul =(60*values.C)/Numberofpassengersforoffpeakhours(values);
     return calcul
   }
+  const Fleetsizeforpeakhourswhenaverageofpassengersareknown = (values) =>{
+    var calcul = N7(values)/FrequencyforpeakhourscalculationSen2(values);
+    return calcul
+  }
+  const Fleetsizeforoffpeakhourswhenaverageofpassengersareknown = (values) =>{
+    var calcul = N7(values)/FrequencyforpeakoffhourscalculationSen2(values);
+    return calcul
+  }
+
   const Numberofpassengersperhour = (values) => {
     var calcul =(60*values.C)/Numberofpotentialusersperday(values)/values.WD;
     
@@ -94,7 +103,12 @@ const FleetSizeDataResults = (props) => {
     var calcul =(((120*values.L/values.S)+values.T)*values.To)/values.A
     return calcul
   }
+  const Numberofpassengersperhoursenario3 = (values) => {
+    var calcul =Numberofpotentialusersperday(values)/values.O;
    
+    return calcul
+  }
+  
   const Fleetsizefor1hourofservice = (values) => {
     var calcul =N7(values)/Frequencyperhour(values);
     return calcul
@@ -192,7 +206,7 @@ Besides the fleet size, some additional results are also presented here, such as
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Frequencyforoffpeakhourscalcuation(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              minutes
@@ -226,7 +240,7 @@ Besides the fleet size, some additional results are also presented here, such as
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Fleetsizeforpeakhourscalculation(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              shuttles
@@ -239,7 +253,7 @@ Besides the fleet size, some additional results are also presented here, such as
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+             {Fleetsizeforoffpeakhourscalculation(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              shuttles
@@ -265,10 +279,10 @@ Besides the fleet size, some additional results are also presented here, such as
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {scenario1Daily(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-             Kms
+             Km
              </td>
          </tr>
 
@@ -277,10 +291,10 @@ Besides the fleet size, some additional results are also presented here, such as
 Monthly             </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {scenario1Monthly(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-             Kms
+             Km
              </td>
          </tr>
          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -288,10 +302,10 @@ Monthly             </th>
 Yearly            </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {scenario1Yearly(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-             Kms
+             Km
              </td>
          </tr>
         
@@ -353,7 +367,7 @@ Senario 2
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Numberofpotentialusersperday(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              potential users
@@ -376,7 +390,7 @@ Senario 2
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Numberofpassengersforpeakhours(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
               users/hour
@@ -389,7 +403,7 @@ Senario 2
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Numberofpassengersforoffpeakhours(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              users/hour
@@ -412,7 +426,7 @@ Senario 2
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {FrequencyforpeakhourscalculationSen2(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              minutes
@@ -425,7 +439,7 @@ Senario 2
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {FrequencyforpeakoffhourscalculationSen2(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              minutes
@@ -449,7 +463,7 @@ Senario 2
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Fleetsizeforpeakhourswhenaverageofpassengersareknown(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              shuttles
@@ -462,7 +476,7 @@ Senario 2
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Fleetsizeforoffpeakhourswhenaverageofpassengersareknown(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              shuttles
@@ -487,7 +501,7 @@ Senario 2
             
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-             Kms
+             Km
              </td>
          </tr>
 
@@ -499,7 +513,7 @@ Monthly             </th>
             
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-             Kms
+             Km
              </td>
          </tr>
          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
@@ -510,7 +524,7 @@ Yearly            </th>
             
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-             Kms
+             Km
              </td>
          </tr>
         
@@ -538,11 +552,11 @@ Senario 3
      <tbody>
          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-             Number of passengers for peak hours:
+             Number of potential users per day:
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Numberofpotentialusersperday(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
               users/hour
@@ -551,11 +565,11 @@ Senario 3
 
          <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-             Number of passengers for off-peak hours:
+             Number of passengers per hour:
              </th>
              
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
-            
+            {Numberofpassengersperhoursenario3(myData)}
              </td>
              <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
              users/hour
@@ -564,9 +578,221 @@ Senario 3
        
      </tbody>
  </table>
+
+
+ <table className=" text-sm text-left text-gray-500 dark:text-gray-400 mt-2 pr-8">
+     <thead className="text-xs text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400">
+         <tr>
+            
+         </tr>
+     </thead>
+     <tbody>
+         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+             <th scope="row" className="px-6 py-4 font-medium text-gray-900  dark:text-white">
+             Frequency per hour
+             </th>
+             
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+            {Frequencyperhour(myData)}
+             </td>
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+             shuttles
+             </td>
+         </tr>
+
+         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap break-words dark:text-white">
+             Fleet size for 1 hour of service
+             </th>
+             
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+            {Fleetsizefor1hourofservice(myData)}
+             </td>
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+             shuttles
+             </td>
+         </tr>
+       
+     </tbody>
+ </table>
+ <table className=" text-sm text-left text-gray-500 dark:text-gray-400">
+     <thead className="text-xs text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400">
+         
+      <th colspan="3" className="px-6 py-3">Maximum total of kilometers per shuttle</th>
+    
+     </thead>
+     <tbody>
+         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            Daily
+             </th>
+             
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+            
+             </td>
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+             Km
+             </td>
+         </tr>
+
+         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+Monthly             </th>
+             
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+            
+             </td>
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+             Km
+             </td>
+         </tr>
+         <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+             <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+Yearly            </th>
+             
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+            
+             </td>
+             <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+             Km
+             </td>
+         </tr>
+        
+       
+     </tbody>
+ </table>
+
     </div>
    
-  
+    <div className=" mb-4 px-2">
+
+<div className="bg-green-100">
+
+Supply side
+
+
+
+</div>
+<table className=" text-sm text-left text-gray-500 dark:text-gray-400 mt-2">
+ <thead className="text-xs text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400">
+     <tr>
+        
+     </tr>
+ </thead>
+ <tbody>
+     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+         Number of passengers for peak hours:
+         </th>
+         
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+        {NumberofpassengersforpeakhoursSupply(myData)}
+         </td>
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+          users/hour
+         </td>
+     </tr>
+
+     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+         Number of passengers for off-peak hours:
+         </th>
+         
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+        {NumberofpassengersforoffpeakhoursSupply(myData)}
+         </td>
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+         users/hour
+         </td>
+     </tr>
+   
+ </tbody>
+</table>
+
+
+<table className=" text-sm text-left text-gray-500 dark:text-gray-400 mt-2 pr-8">
+ <thead className="text-xs text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400">
+     <tr>
+        
+     </tr>
+ </thead>
+ <tbody>
+     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+         <th scope="row" className="px-6 py-4 font-medium text-gray-900  dark:text-white">
+         Fleet size for peak hours calculation:
+         </th>
+         
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+        {Fleetsizeforpeakhourscalculationsupply(myData)}
+         </td>
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+         shuttles
+         </td>
+     </tr>
+
+     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap break-words dark:text-white">
+         Fleet size for off-peak hours calculation:
+         </th>
+         
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+        {Fleetsizeforoffpeakhourscalculationsupply(myData)}
+         </td>
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+         shuttles
+         </td>
+     </tr>
+   
+ </tbody>
+</table>
+<table className=" text-sm text-left text-gray-500 dark:text-gray-400">
+ <thead className="text-xs text-gray-700 uppercase  dark:bg-gray-700 dark:text-gray-400">
+     
+  <th colspan="3" className="px-6 py-3">Maximum total of kilometers per shuttle</th>
+
+ </thead>
+ <tbody>
+     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        Daily
+         </th>
+         
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+         {Dailysupply(myData)}
+         </td>
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+         Km
+         </td>
+     </tr>
+
+     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+Monthly             </th>
+         
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+        {Monthlysupply(myData)}
+         </td>
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+         Km
+         </td>
+     </tr>
+     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+         <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+Yearly            </th>
+         
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+        {Yearlysupply(myData)}
+         </td>
+         <td className="px-6 py-4 font-medium text-gray-900 bg-indigo-100">
+         Km
+         </td>
+     </tr>
+    
+   
+ </tbody>
+</table>
+
+</div>
     
   </div>
 
@@ -574,7 +800,7 @@ Senario 3
 
 
   <Link to='/thirdpage'
-      ><Button style={{ marginTop: "30px" }}>Next</Button></Link>
+      ><Button style={{ marginTop: "30px" }} className="mb-3">Next</Button></Link>
 
     </div>
   );

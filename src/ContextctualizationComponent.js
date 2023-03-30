@@ -1,11 +1,14 @@
 import React from "react";
 import * as Yup from "yup";
+
+import { Formik, Field, Form } from 'formik';
+import { useFormik } from 'formik';
 import {Link} from 'react-router-dom';
 
 //import "@material-tailwind/react/tailwind.css";
 
 
-import { Formik } from "formik";
+
 
 // tailwind components
 import { Button } from "@material-tailwind/react";
@@ -24,11 +27,81 @@ const ContextctualizationComponent = () => {
     const [checkedRural, setCheckedRural] = useState(false);
     const [checkedPUrban, setCheckedPUrban] = useState(false);
     const [checkedRes, setCheckedRes] = useState(false);
+
+
+    const [option1Checked, setOption1Checked] = useState(false);
+    const [option2Checked, setOption2Checked] = useState(false);
+    const [option3Checked, setOption3Checked] = useState(false);
+    const [option4Checked, setOption4Checked] = useState(false);
+    const [option5Checked, setOption5Checked] = useState(false);
+  
+    const handleOption1Change = (event) => {
+      setOption1Checked(event.target.checked);
+      setOption2Checked(false);
+      setOption3Checked(false);
+      setOption4Checked(false);
+      setOption5Checked(false);
+    };
+  
+    const handleOption2Change = (event) => {
+      setOption1Checked(false);
+      setOption2Checked(event.target.checked);
+      setOption3Checked(false);
+      setOption4Checked(false);
+      setOption5Checked(false);
+
+    };
+  
+    const handleOption3Change = (event) => {
+      setOption1Checked(false);
+      setOption2Checked(false);
+      setOption3Checked(event.target.checked);
+      setOption4Checked(false);
+      setOption5Checked(false);
+
+    };
+  
+    const handleOption4Change = (event) => {
+      setOption1Checked(false);
+      setOption2Checked(false);
+      setOption3Checked(false);
+      setOption4Checked(event.target.checked);
+      setOption5Checked(false);
+
+    };
+    const handleOption5Change = (event) => {
+      setOption1Checked(false);
+      setOption2Checked(false);
+      setOption3Checked(false);
+      setOption4Checked(false);
+      setOption5Checked(event.target.checked);
+
+    };
+
     
   // perform some command
   const _onSave = (values) => {
     console.log(values);
   };
+
+
+  const formik = useFormik({
+    initialValues: {
+      context1: '',
+      context2: '',
+     
+    },
+    onSubmit: values => {
+      // alert(JSON.stringify( averageOperationalSpeed(values), null, 2));
+      // setFisrtformvalues(values);
+      // firstformvaluesVar= values;
+      //setFisrtformvalues(values);
+      console.log(values);
+     
+
+    },
+  });
+
 
   return (
     <div>
@@ -77,8 +150,9 @@ const ContextctualizationComponent = () => {
               error={errors.email && touched.email && errors.email}
               success={!errors.email && touched.email ? "Valid" : ""}
             /> </div> */}
-
+<form onSubmit={formik.handleSubmit}>
 <div>
+
             <p className="font-bold">Is there already public transport services being offered in the area where the shuttle will operate?											
 </p>
             <Checkbox label="yes"   onChange={() => setChecked(!checked)} checked={checked} />
@@ -149,43 +223,187 @@ Percentage of public transport utilization are most likely available - calculati
             <p className="font-bold">What is the zoning to be served by the service in such environment?											
 											
 </p>
-            <Checkbox label="Residential"   onChange={() => setCheckedRes(!checkedRes)} checked={checkedRes} />
-            <Checkbox label="Commercial"  />
-            <Checkbox label="Industrial"  />
-            <Checkbox label="Touristic" />
-            <Checkbox label="Mixed"  />
+            <Checkbox label="Residential"   checked={option1Checked} onChange={handleOption1Change} />
+            <Checkbox label="Commercial" checked={option2Checked} onChange={handleOption2Change} />
+            <Checkbox label="Industrial"  checked={option3Checked} onChange={handleOption3Change}/>
+            <Checkbox label="Touristic" checked={option4Checked} onChange={handleOption4Change}/>
+            <Checkbox label="Mixed"  checked={option5Checked} onChange={handleOption5Change}/>
 
-            {
-             checkedRes ? (
-                <div class="w-85 mx-20" >
-  <div class="relative h-10 w-full min-w-[200px]">
-    <input
+
+
+
+
+            {option1Checked && <div class="w-85 mx-20" >
+
+              
+  <div class=" h-10 w-full min-w-[200px] mb-3">
+  <label for="name" class="block text-gray-700 mb-2">What is the average extension of the area to be served by the service (km2 or mi2)?			</label>
+  <input
       class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-      placeholder=" "
-    />
-    <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-    What is the average extension of the area to be served by the service (km2 or mi2)?						
-
-    </label>
+      placeholder=" " onChange={formik.handleChange}
+      value={formik.values.context1}
+     
+      id="c1"
+      name="context1"
+      type="text"
+    
+    />		
     
   </div>
   <br/>
 
-  <div class="relative h-10 w-full min-w-[200px]">
+  <div class=" h-10 w-full min-w-[200px] mb-3">
+    <label for="name" class="block text-gray-700 mb-2">How many inhabitants are in the area?				</label>
     <input
       class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
-      placeholder=" "
+      placeholder=" " onChange={formik.handleChange}
+      value={formik.values.context2}
+     
+      id="c1"
+      name="context2"
+      type="text"
+    
     />
-    <label class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-    How many inhabitants are in the area?						
-					
-
-    </label>
     
   </div>
+</div>}
+      {option2Checked && <div class="w-85 mx-20" >
+
+              
+<div class=" h-10 w-full min-w-[200px] mb-3">
+<label for="name" class="block text-gray-700 mb-2">What is the average extension of the area to be served by the service (km2 or mi2)?			</label>
+<input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context1}
+   
+    id="c1"
+    name="context1"
+    type="text"
+  
+  />		
+  
 </div>
-               ) : (<div></div>)
-           }
+<br/>
+
+<div class=" h-10 w-full min-w-[200px] mb-3">
+  <label for="name" class="block text-gray-700  mb-2">How many workers and consumers are in the area?	</label>
+  <input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context2}
+   
+    id="c1"
+    name="context2"
+    type="text"
+  
+  />
+  
+</div>
+</div>}
+      {option3Checked && <div class="w-85 mx-20" >
+
+              
+<div class=" h-10 w-full min-w-[200px] mb-3">
+<label for="name" class="block text-gray-700  mb-2">What is the average extension of the area to be served by the service (km2 or mi2)?			</label>
+<input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context1}
+   
+    id="c1"
+    name="context1"
+    type="text"
+  
+  />		
+  
+</div>
+<br/>
+
+<div class=" h-10 w-full min-w-[200px] mb-3">
+  <label for="name" class="block text-gray-700  mb-2">How many workers are in the area?				</label>
+  <input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context2}
+   
+    id="c1"
+    name="context2"
+    type="text"
+  
+  />
+  
+</div>
+</div>}
+      {option4Checked && <div class="w-85 mx-20" >
+
+              
+<div class=" h-10 w-full min-w-[200px] mb-3">
+<label for="name" class="block text-gray-700  mb-2">What is the average extension of the area to be served by the service (km2 or mi2)?			</label>
+<input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context1}
+   
+    id="c1"
+    name="context1"
+    type="text"
+  
+  />		
+  
+</div>
+<br/>
+
+<div class=" h-10 w-full min-w-[200px] mb-3">
+  <label for="name" class="block text-gray-700  mb-2">How many tourists are in the area?				</label>
+  <input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context2}
+   
+    id="c1"
+    name="context2"
+    type="text"
+  
+  />
+  
+</div>
+</div>}
+      {option5Checked && <div class="w-85 mx-20" >
+
+              
+<div class=" h-10 w-full min-w-[200px] mb-3">
+<label for="name" class="block text-gray-700  mb-2">What is the average extension of the area to be served by the service (km2 or mi2)?			</label>
+<input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context1}
+   
+    id="c1"
+    name="context1"
+    type="text"
+  
+  />		
+  
+</div>
+<br/>
+
+<div class=" h-10 w-full min-w-[200px] mb-3">
+  <label for="name" class="block text-gray-700  mb-2">How many inhabitants, workers, consumers, tourists are in the area?				</label>
+  <input
+    class="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+    placeholder=" " onChange={formik.handleChange}
+    value={formik.values.context2}
+   
+    id="c1"
+    name="context2"
+    type="text"
+  
+  />
+  
+</div>
+</div>}
+            
            
             </div>
 
@@ -217,10 +435,8 @@ Percentage of public transport utilization are most likely available - calculati
             <div style={{ marginBottom: "30px", width: "100%" }}>
             <Link to='/FleetSizeDataEntry'
       ><Button
-      type="submit"
- 
-    >
-      Submit
+      type="submit" >
+      next
     </Button></Link>
               
             </div>
@@ -228,7 +444,9 @@ Percentage of public transport utilization are most likely available - calculati
         {/* </form>
       )}
     </Formik> */}
+    </form>
     </div>
+    
   );
 };
 
